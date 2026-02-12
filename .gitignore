@@ -1,0 +1,10 @@
+# Ignore object files and executable
+*.o
+game.exe
+game
+*.txt
+Makefile
+compile_commands.json
+.vscode
+.clangd
+build.bat
