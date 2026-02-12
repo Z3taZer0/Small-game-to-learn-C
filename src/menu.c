@@ -1,30 +1,18 @@
 #include "menu.h"
-#include <stdio.h>
+#include "raylib.h"
 
-
-void show_menu() {
-  printf("\n--- GAME MENU ---\n");
-  printf("1. Play Game\n");
-  printf("2. Exit\n");
-  printf("Selection: ");
+void update_menu(GameState *currentState) {
+    if (IsKeyPressed(KEY_P)) {
+        *currentState = STATE_PLAYING;
+    }
+    else if (IsKeyPressed(KEY_E)) {
+        *currentState = STATE_EXIT;
+    }
 }
 
-GameState handle_menu_input() {
-  int choice;
-  if (scanf("%d", &choice) != 1) {
-    // Clear invalid input
-    while (getchar() != '\n')
-      ;
-    return STATE_MENU;
-  }
-
-  switch (choice) {
-  case 1:
-    return STATE_PLAYING;
-  case 2:
-    return STATE_EXIT;
-  default:
-    printf("Invalid selection!\n");
-    return STATE_MENU;
-  }
+void draw_menu() {
+    ClearBackground(DARKGRAY);
+    DrawText("--- GAME MENU ---", 190, 100, 20, WHITE);
+    DrawText("1. Play Game (P)", 190, 150, 20, WHITE);
+    DrawText("2. Exit (E)", 190, 180, 20, WHITE);
 }
