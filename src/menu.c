@@ -12,7 +12,7 @@ void update_menu(GameState *currentState) {
 
 void draw_menu() {
     ClearBackground(DARKGRAY);
-    DrawText("--- GAME MENU ---", 190, 100, 20, WHITE);
-    DrawText("1. Play Game (P)", 190, 150, 20, WHITE);
-    DrawText("2. Exit (E)", 190, 180, 20, WHITE);
+    DrawText("--- GAME MENU ---", 850, 400, 20, WHITE);
+    DrawText("1. Play Game (P)", 850, 450, 20, WHITE);
+    DrawText("2. Exit (E)", 850, 500, 20, WHITE);
 }
