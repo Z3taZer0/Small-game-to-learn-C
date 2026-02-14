@@ -1,10 +1,17 @@
-# Ignore object files and executable
+# Build artifacts
 *.o
-game.exe
-game
-*.txt
-Makefile
+
+# Leaks and temporary files
+.cache/
+vendor/
+*.log
+.DS_Store
+
+# IDE and LSP files
+.vscode/
+.clangd/
 compile_commands.json
-.vscode
-.clangd
+
+# Scripts
 build.bat
+*.txt

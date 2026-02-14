@@ -1,32 +1,60 @@
 #include "menu.h"
-#include <stdio.h>
+#include "game.h"
+#include "raylib.h"
 
+int main() {
+  const int screenWidth = 1920;
+  const int screenHeight = 1080;
 
-int main(int argc, char *argv[]) {
+  InitWindow(screenWidth, screenHeight, "Small C Game");
+
+  // Force the window to open on the main screen
+  int monitor = 0; //Main screen
+  SetWindowMonitor(monitor); 
+
+  //Center the window on the main screen
+  int monitorWidth = GetMonitorWidth(monitor);
+  int monitorHeight = GetMonitorHeight(monitor);
+  SetWindowPosition(monitorWidth/2 - screenWidth/2, monitorHeight/2 - screenHeight/2);
+
+  SetTargetFPS(120);
+  SetExitKey(KEY_Q); //Close the window with Q and not ESC by default (it was very annoying)
+
   GameState currentState = STATE_MENU;
-  int running = 1;
 
-  while (running) {
+  while (!WindowShouldClose() && currentState != STATE_EXIT) {
+    // Update logic
     switch (currentState) {
     case STATE_MENU:
-      show_menu();
-      currentState = handle_menu_input();
+      update_menu(&currentState);
       break;
 
     case STATE_PLAYING:
-      printf("\n--- GAME START ---\n");
-      printf("Game is running! (Press Enter to return to menu)");
-      getchar(); // Consume newline from menu input
-      getchar(); // Wait for user enter
-      currentState = STATE_MENU;
+      // Logic handled in run_game below for simplicity
       break;
 
     case STATE_EXIT:
-      printf("Exiting game. Goodbye!\n");
-      running = 0;
       break;
     }
+
+    // Draw
+    BeginDrawing();
+    switch (currentState) {
+    case STATE_MENU:
+      draw_menu();
+      break;
+
+    case STATE_PLAYING:
+      run_game(&currentState);
+      break;
+
+    case STATE_EXIT:
+      break;
+    }
+    EndDrawing();
   }
+
+  CloseWindow();
 
   return 0;
 }
